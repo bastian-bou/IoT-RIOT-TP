@@ -1,0 +1,20 @@
+APPLICATION=BaseSys_rename
+
+BOARD ?= native
+
+USEMODULE += xtimer
+
+USEMODULE += grove_ledbar
+
+#export parameters
+CFLAGS += -DGROVE_LEDBAR_CLK="(GPIO_PIN(PORT_A,9))"
+CFLAGS += -DGROVE_LEDBAR_DAT="(GPIO_PIN(PORT_A,8))"
+CFLAGS += -DGROVE_LEDBAR_DIR=GROVE_LEDBAR_G2R
+CFLAGS += -DGROVE_LEDBAR_LEDS=10
+
+RIOTBASE ?= $(CURDIR)/../../RIOT
+
+DEVELHELP ?= 1
+
+include $(RIOTBASE)/Makefile.include
+
