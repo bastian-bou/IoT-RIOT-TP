@@ -14,7 +14,7 @@
 #include "net/nanocoap.h"
 #include "hashes/sha256.h"
 #include "lps331ap.h"
-#include "lps331ap-params.h"
+#include "lps331ap_params.h"
 
 /* internal value that can be read/written via CoAP */
 static uint8_t internal_value = 0;
@@ -125,7 +125,7 @@ ssize_t _sha256_handler(coap_pkt_t* pkt, uint8_t *buf, size_t len, void *context
     if (block1.more == 1) {
         result = COAP_CODE_CONTINUE;
     }
-https://www.iot-lab.info/tutorials/riot-coap-m3/
+
     size_t result_len = 0;
     if (!blockwise || !block1.more) {
         puts("_sha256_handler(): finish");
