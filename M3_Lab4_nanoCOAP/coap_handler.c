@@ -13,8 +13,7 @@
 #include "fmt.h"
 #include "net/nanocoap.h"
 #include "hashes/sha256.h"
-#include "lps331ap.h"
-#include "lps331ap_params.h"
+
 
 /* internal value that can be read/written via CoAP */
 static uint8_t internal_value = 0;
@@ -22,6 +21,8 @@ static uint8_t internal_value = 0;
 static const uint8_t block2_intro[] = "This is RIOT (Version: ";
 static const uint8_t block2_board[] = " running on a ";
 static const uint8_t block2_mcu[] = " board with a ";
+
+extern uint32_t temperature, pression;
 
 static ssize_t _riot_board_handler(coap_pkt_t *pkt, uint8_t *buf, size_t len, void *context)
 {
@@ -150,9 +151,8 @@ static ssize_t _tempSensor_handler(coap_pkt_t *pkt, uint8_t *buf, size_t len, vo
     ssize_t p = 0;
     char rsp[16];
     
-    uint8_t temp = 22;
     
-	p += fmt_u32_dec(rsp, temp);
+	p += fmt_u32_dec(rsp, temperature);
 
     return coap_reply_simple(pkt, COAP_CODE_205, buf, len,
             COAP_FORMAT_TEXT, (uint8_t*)rsp, p);
